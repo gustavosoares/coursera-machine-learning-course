@@ -1,6 +1,7 @@
 *.idea
 *.zip
 **/octave-workspace
+**/token.mat
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
