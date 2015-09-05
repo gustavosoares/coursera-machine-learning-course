@@ -32,7 +32,13 @@ X = [ones(m, 1) X];
 
 
 
+%for c = 1:num_labels,
+%
+%end;
 
+prob = sigmoid(X * all_theta');
+
+[v p] = max(prob,[],2);
 
 
 
