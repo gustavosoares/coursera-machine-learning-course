@@ -63,25 +63,35 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+y_matrix = eye(num_labels)(y,:);
+
+a1 = [ones(m, 1) X];
+
+z2 = a1 * Theta1';
+
+a2 = sigmoid(z2);
+a2 = [ones(m, 1) a2];
+
+z3 = a2 * Theta2';
+
+a3 = sigmoid(z3);
+
+% computing the unregularized cost with a3. y_matrix and m
+
+
+J = 1/m * sum(sum((-y_matrix.*log(a3)) - ((1 - y_matrix) .* log(1-a3))));
+
+T1 = Theta1(:,2:end).^2;
+T2 = Theta2(:,2:end).^2;
+
+Sum1 = 0;
+Sum2 = 0;
 
 
 
+R = (lambda / (2 * m)) * (sum(sum(T1)) + sum(sum(T2)));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-% -------------------------------------------------------------
-
+J = J + R;
 % =========================================================================
 
 % Unroll gradients
