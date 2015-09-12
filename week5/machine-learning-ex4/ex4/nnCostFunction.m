@@ -81,17 +81,26 @@ a3 = sigmoid(z3);
 
 J = 1/m * sum(sum((-y_matrix.*log(a3)) - ((1 - y_matrix) .* log(1-a3))));
 
-T1 = Theta1(:,2:end).^2; % remove first column (bias)
-T2 = Theta2(:,2:end).^2; % remove first column (bias)
+T1 = Theta1(:,2:end); % remove first column (bias)
+T2 = Theta2(:,2:end); % remove first column (bias)
 
-Sum1 = 0;
-Sum2 = 0;
-
-
-
-R = (lambda / (2 * m)) * (sum(sum(T1)) + sum(sum(T2)));
+R = (lambda / (2 * m)) * (sum(sum(T1.^2)) + sum(sum(T2.^2)));
 
 J = J + R;
+
+% Backpropagation
+
+%delta 3
+d3 = a3 - y_matrix;
+
+d2 = (d3 * T2) .* sigmoidGradient(z2);
+
+Delta1 = d2' * a1;
+Delta2 = d3' * a2;
+
+Theta1_grad = 1/m .* Delta1;
+Theta2_grad = 1/m .* Delta2;
+
 % =========================================================================
 
 % Unroll gradients
