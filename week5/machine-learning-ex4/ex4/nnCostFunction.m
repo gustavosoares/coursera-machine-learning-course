@@ -81,8 +81,8 @@ a3 = sigmoid(z3);
 
 J = 1/m * sum(sum((-y_matrix.*log(a3)) - ((1 - y_matrix) .* log(1-a3))));
 
-T1 = Theta1(:,2:end).^2;
-T2 = Theta2(:,2:end).^2;
+T1 = Theta1(:,2:end).^2; % remove first column (bias)
+T2 = Theta2(:,2:end).^2; % remove first column (bias)
 
 Sum1 = 0;
 Sum2 = 0;
